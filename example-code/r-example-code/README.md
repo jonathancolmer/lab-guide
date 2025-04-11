@@ -8,8 +8,8 @@ This repository contains example R code for common tasks in economic research an
 - [Combining Datasets (adding rows)](combining%20datasets%20--%20adding%20rows.R)
 - [Creating and Modifying Variables]
 - [Filtering Rows and Columns](filter_rows_columns.R)
-- [For Loops]
-- [Functions]
+- [For Loops](for_loops.R)
+- [Functions](functions.R)
 - [Histogram]
 - [Line Graph]
 - [Regression](regression.R)
