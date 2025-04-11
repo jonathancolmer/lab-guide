@@ -9,7 +9,7 @@
 # an error, and works much more smoothly with large datasets. 
 
 # Install tidyverse package (if not installed already): 
-packages.install("tidyverse")
+install.packages("tidyverse")
 
 # Load tidyverse
 library(tidyverse)
