@@ -13,5 +13,5 @@ This repository contains example R code for common tasks in economic research an
 - [Histogram](histogram.R)
 - [Line Graph](line_graph.R)
 - [Regression](regression.R)
-- [Setting a Working Directory]
+- [Setting a Working Directory](working_directory.R)
 - [Scatterplot](scatterplot.R)
