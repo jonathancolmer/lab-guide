@@ -10,7 +10,7 @@ This repository contains example R code for common tasks in economic research an
 - [Filtering Rows and Columns](filter_rows_columns.R)
 - [For Loops](for_loops.R)
 - [Functions](functions.R)
-- [Histogram]
+- [Histogram](histogram.R)
 - [Line Graph](line_graph.R)
 - [Regression](regression.R)
 - [Setting a Working Directory]
