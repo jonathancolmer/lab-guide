@@ -12,6 +12,6 @@ This repository contains example R code for common tasks in economic research an
 - [Histogram](#license)
 - [Line Graph](#contact)
 - [Merge]
-- [Regression](#https://github.com/jonathancolmer/lab-guide/blob/main/example-code/r-example-code/regression.R)
+- [Regression](regression.R)
 - [Setting a Working Directory]
 - [Scatterplot]
