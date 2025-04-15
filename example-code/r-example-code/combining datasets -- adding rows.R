@@ -14,6 +14,10 @@ install.packages("tidyverse")
 # Load tidyverse
 library(tidyverse)
 
+# Load data
+dataset1 <- read.csv()
+dataset2 <- read.csv()
+
 # Example 1: Appending Two Datasets with rbind()
 
 # Bind  2 rows of two datasets (dataset1 and dataset2) 
@@ -59,3 +63,4 @@ dataset_appended <- bind_rows(dataset_list)
 
 # Print the appended dataset to verify the result.
 print(dataset_appended)
+
