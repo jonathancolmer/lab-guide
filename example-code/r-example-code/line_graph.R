@@ -13,6 +13,7 @@ data <- read.csv("path/to/your/dataset.csv")
 
 # Once your dataset is loaded, ensure that the column names in the 'aes()' 
 # function below match those in your dataset.
+# Modify the line graph code to reflect the actual names of these variables.
 
 # Create a line graph using ggplot2 with your dataset
 ggplot(data, aes(x = time, y = value)) +
