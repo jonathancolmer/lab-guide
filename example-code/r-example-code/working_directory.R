@@ -7,6 +7,10 @@
 # directories, and the second half provides a template to add to the preamble
 # of your R scripts. 
 
+## Preamble: Load Necessary Packages ##
+install.packages("tidyverse")
+library(tidyverse)
+
 ##### Part 1: Introduction to Working Directories #####
 
 # Check the current working directory
@@ -55,3 +59,7 @@ code_dir <- switch(username,
                      readline(prompt = "Enter the code directory path: ")
                    }
 )
+
+# Set the working directory to the main directory.
+setwd(main_dir) # Can switch this with code_dir to set the coding directory
+cat("Working directory set to:", getwd(), "\n")
