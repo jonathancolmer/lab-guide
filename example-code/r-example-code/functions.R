@@ -3,43 +3,56 @@
 # or can be called (used) to make a repetitive data processing task more 
 # efficient. This makes replication much easier. 
 
+# Since functions vary so much in structure and purpose, this code provides
+# an example of what building your own function might be useful for, rather
+# than a template where you can plug values in to get the scenario-specific
+# output you need. 
+
 # Install and load tidyverse package (if not installed already):
 install.packages("tidyverse")
 library(tidyverse)
 
-# Functions can be used to run two sets or arguments in parallel.
+##### Create Sample Data #####
+# This dataset includes example GDP and emissions data for the US. 
+env_data <- data.frame(
+  country   = rep("USA"),
+  year      = rep(2010:2015),
+  gdp       = c(15000, 15500, 16000, 17000, 21000, 22000),  # Example GDP values
+  emissions = c(500, 480, 460, 600, 680, 760)             # Example emissions values
+)
 
-## Example: Attaching Year Information to a Dataset ##
+cat("Original environmental data:\n")
+print(env_data)
 
-# The following example attaches two columns of year data to a dataset.
-
-# Define two sequences:
-# - 'year_t_list' contains the current years (e.g., 2010, 2011, 2012)
-# - 'year_tminus1_list' contains the corresponding previous years 
-# (e.g., 2009, 2010, 2011)
-year_t_list      <- 2010:2012       # Current year tags
-year_tminus1_list <- 2009:2011      # Previous year tags
-
-# Create an empty list to store the modified datasets
-append_list <- list()
-
-# Define a function that takes a current year (i) and a previous year (s),
-# then attaches these as new columns to the dataset.
-append_function <- function(i, s) {
+##### Defining the Function #####
+# Define a function to calculate emissions intensity and the year-to-year percent change.
+calculate_intensity <- function(df) {
+  # Ensure the data is sorted by 'year'
+  df <- df %>% arrange(year)
   
-  # Add the current year 'i' to a new column called 'year_t'
-  dataset_in_loop$year_t <- i
+  # Calculate emissions intensity, defined as emissions divided by GDP.
+  df <- df %>% mutate(intensity = emissions / gdp)
   
-  # Add the previous year 's' to a new column called 'year_tminus1'
-  dataset_in_loop$year_tminus1 <- s
+  # Calculate the percentage change in intensity from the previous year.
+  # lag(intensity) returns the intensity for the previous year within each group.
+  df <- df %>% mutate(intensity_change = (intensity - lag(intensity)) / lag(intensity) * 100)
   
-  # Append the modified dataset to the global list 'append_list'
-  # The double arrow <<- is used to modify the 'append_list' outside the 
-  # function's local scope.
-  append_list[[i]] <<- dataset_in_loop
+  return(df)
 }
 
-# Call the function to loop over the year sequences in parallel using mapply.
-# For each pair (current year, previous year), the function 'append_function'
-# is applied, creating a new, tagged version of the dataset.
-mapply(i = year_t_list, s = year_tminus1_list, append_function)
+##### Call the Function #####
+# Apply the calculate_intensity() function to perform the calculations 
+# on the data, and store the new dataset as 'env_data_modified'. 
+env_data_modified <- calculate_intensity(env_data)
+
+# Check the modified data
+cat("\nModified environmental data with intensity and percent change:\n")
+print(env_data_modified)
+
+# In the case of a single dataset, there's not really a huge advantage in using
+# a function to perform these calculations vs. directly coding the operations
+# into your data. However, functions tend to be really useful when you have to 
+# repeat the task many times -- imagine a case where you have data for many 
+# countries and wanted to repeat this calculation throughout your script. Then, 
+# the function would make your code much more streamlined!
+
