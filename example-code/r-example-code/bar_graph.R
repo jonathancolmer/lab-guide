@@ -7,11 +7,8 @@
 install.packages("ggplot2")
 library(ggplot2)
 
-# Generate fake dataset
-data <- data.frame(
-  category = c("A", "B", "C", "D"),  # Categories
-  count    = c(10, 15, 7, 20)         # Corresponding counts
-)
+# Load data
+data <- read.csv ("replace/with/your/file_path") 
 
 # Create a bar graph using ggplot2
 ggplot(data, aes(x = category, y = count)) +
