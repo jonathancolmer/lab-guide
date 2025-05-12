@@ -64,3 +64,4 @@ coefs <- coef(model1)
 # Calculate the linear combination: coefficient on 'wt' + 2 * coefficient on 'hp'
 lin_comb <- coefs["wt"] + 2 * coefs["hp"]
 cat("Linear combination (wt + 2*hp):", lin_comb, "\n") # Print the result
+

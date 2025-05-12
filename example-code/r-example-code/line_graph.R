@@ -6,7 +6,7 @@ install.packages("ggplot2")
 library(ggplot2)
 
 # Load your dataset
-data <- read.csv("path/to/your/dataset.csv")
+data <- iris
 # Make sure your dataset has at least two variables: 
 # one for the x-axis (e.g., 'time') and one for the y-axis (e.g., 'value').
 
@@ -16,10 +16,10 @@ data <- read.csv("path/to/your/dataset.csv")
 # Modify the line graph code to reflect the actual names of these variables.
 
 # Create a line graph using ggplot2 with your dataset
-ggplot(data, aes(x = time, y = value)) +
-  geom_line(color = "blue") +      # Draw a blue line connecting the data points
+ggplot(data, aes(x = Petal.Length, y = Petal.Width)) +
+  geom_line(color = "black") +       # Draw a black line connecting the data 
   labs(
-    title = "Line Graph",           # Set the plot title
-    x = "Time",                     # Label for the x-axis
-    y = "Value"                     # Label for the y-axis
+    title = "Petal Length vs. Width",          # Set the plot title
+    x = "Petal Length (cm)",                   # Label for the x-axis
+    y = "Petal Width (cm)"                     # Label for the y-axis
   )

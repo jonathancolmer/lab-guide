@@ -8,8 +8,8 @@
 install.packages("tidyverse")
 library(tidyverse)
 
-# Load your dataset
-dataset <- read.csv("path/to/your/data/here")
+# Load your dataset (we will use the built-in mtcars dataset as an example)
+dataset <- mtcars
 
 ## FILTER ROWS ##
 
@@ -21,37 +21,37 @@ dataset <- read.csv("path/to/your/data/here")
 
 # Using dplyr (tidyverse approach):
 # dplyr::filter() selects rows that meet the specified condition.
-dataset <- dataset %>%
-  dplyr::filter(variable1 == 2 & variable3 != 5 | is.na(variable4) == TRUE)
-print(dataset)
+filtered_dataset_1 <- dataset %>%
+  dplyr::filter(cyl == 6 & gear != 3 | is.na(carb) == TRUE)
+print(filtered_dataset_1)
 
 # Alternatively, using base R indexing:
 # The dataset[...] syntax selects rows based on the logical condition provided.
 # Here, the expression inside the square brackets returns TRUE if the
 # criteria is met, and FALSE if the criteria is not, and keeps the row
 # in the dataset only when the expression returns TRUE. 
-dataset <- dataset[
-  (dataset$variable1 == 2 & dataset$variable3 != 5) | 
-    is.na(dataset$variable4) == TRUE, 
+filtered_dataset_2 <- dataset[
+  (dataset$cyl == 6 & dataset$gear != 3) | 
+    is.na(dataset$carb) == TRUE, 
 ]
-print(dataset)
+print(filtered_dataset_2)
 
 ## FILTER COLUMNS ##
 
 # Keep only variables variable1 and variable2
 
 # With dplyr
-dataset <- dataset%>%
-  dplyr::select(variable1, variable2)
-print(dataset)
+col_filtered_dataset1 <- dataset%>%
+  dplyr::select(mpg, wt)
+print(col_filtered_dataset1)
 
 # With conventional code
-dataset <- dataset[, c("variable1", "variable2")]
-print(dataset)
+col_filtered_dataset2 <- dataset[, c("mpg", "wt")]
+print(col_filtered_dataset2)
 
 # Alternatively, you can select to keep columns by their number
 # This code keeps column numbers 1 and 2 
 # The colon means "through"
-dataset <- dataset[, 1:2]
-print(dataset)
+col_filtered_dataset3 <- dataset[, 1:2]
+print(col_filtered_dataset3)
 

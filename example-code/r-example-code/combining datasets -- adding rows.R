@@ -14,15 +14,15 @@ install.packages("tidyverse")
 # Load tidyverse
 library(tidyverse)
 
-# Load data
-dataset1 <- read.csv()
-dataset2 <- read.csv()
+# Use mtcars and split it into two pieces by row number:
+mtcars1 <- mtcars[1:16, ]   # rows 1–16
+mtcars2 <- mtcars[17:32, ]  # rows 17–32
 
 # Example 1: Appending Two Datasets with rbind()
 
 # Bind  2 rows of two datasets (dataset1 and dataset2) 
 # with identical variable names using rbind()
-appended_datasets <- rbind(dataset1, dataset2)
+appended_datasets <- rbind(mtcars1, mtcars2)
 
 
 # Example 2: Appending Multiple Datasets Using a For Loop and bind_rows()
@@ -40,7 +40,8 @@ file_list <- list.files(path = folder_path, pattern = "\\.csv$", full.names = TR
 
 # NOTE:
 # If your files are not in CSV format, adjust the pattern accordingly.
-# For Excel files, consider using the readxl package and pattern = "\\.xlsx$" or "\\.xls$"
+# For Excel files, consider using the readxl package and pattern = "\\.xlsx$" 
+# or "\\.xls$"
 
 # Create an empty list to store the datasets.
 dataset_list <- list()

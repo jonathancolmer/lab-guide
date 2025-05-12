@@ -7,15 +7,24 @@
 install.packages("ggplot2")
 library(ggplot2)
 
-# Load data
-data <- read.csv ("replace/with/your/file_path") 
+# Use the built-in mtcars dataset
+data <- mtcars
 
-# Create a bar graph using ggplot2
-ggplot(data, aes(x = category, y = count)) +
-  geom_bar(stat = "identity", fill = "purple") +  # Draw purple bars
+# Create a summary count of how many cars have each number of cylinders
+# Note: 'cyl' is numeric, so we convert it to a factor to treat it as a 
+# categorical variable, then use table() to count how many times each category
+# appears.
+cyl_counts <- as.data.frame(table(factor(data$cyl)))
+
+# Rename the columns for clarity
+colnames(cyl_counts) <- c("cylinders", "count")
+
+# Plot the summary table using ggplot
+ggplot(cyl_counts, aes(x = cylinders, y = count)) +
+  geom_bar(stat = "identity", fill = "blue") +  # Draw blue bars
   labs(
-    title = "Bar Graph",  # Add a title
-    x = "Category",       # Label for x-axis
-    y = "Count"           # Label for y-axis
+    title = "Number of Cars by Cylinder Count",  # Title of the plot
+    x = "Number of Cylinders",                   # Label for x-axis
+    y = "Count of Cars"                          # Label for y-axis
   )
 
