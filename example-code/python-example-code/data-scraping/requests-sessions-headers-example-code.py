@@ -1,21 +1,22 @@
 import requests
 from bs4 import BeautifulSoup
 
-# Step 1: Create a session object
+# Step 1: Create a session and set headers
 session = requests.Session()
-
-# Step 2: Define headers to mimic a real browser
 session.headers.update({
     "User-Agent": "Mozilla/5.0",
     "Accept-Language": "en-US,en;q=0.9"
 })
 
-# Step 3: Send a GET request through the session
+# Step 2: Define the target URL
 url = "https://www.scrapethissite.com/pages/simple/"
-response = session.get(url)
 
-# Step 4: Parse and extract data if the request was successful
-if response.ok:
+try:
+    # Step 3: Send GET request
+    response = session.get(url, timeout=10)
+    response.raise_for_status()  # Raises an HTTPError for bad responses (4xx or 5xx)
+
+    # Step 4: Parse HTML and extract data
     soup = BeautifulSoup(response.text, "html.parser")
     countries = soup.find_all("div", class_="country")
 
@@ -23,5 +24,10 @@ if response.ok:
         name = country.find("h3", class_="country-name").text.strip()
         capital = country.find("span", class_="country-capital").text.strip()
         print(f"{name} – Capital: {capital}")
-else:
-    print("Error:", response.status_code)
+
+except requests.exceptions.HTTPError as e:
+    print(f"HTTP error occurred: {e}")
+except requests.exceptions.Timeout:
+    print("The request timed out.")
+except requests.exceptions.RequestException as e:
+    print(f"Request failed: {e}")
